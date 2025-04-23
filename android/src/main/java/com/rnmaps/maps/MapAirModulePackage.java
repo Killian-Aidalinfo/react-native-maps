@@ -17,6 +17,7 @@ import com.rnmaps.fabric.NativeAirMapsModule;
 import com.rnmaps.fabric.OverlayManager;
 import com.rnmaps.fabric.PolygonManager;
 import com.rnmaps.fabric.PolylineManager;
+import com.rnmaps.fabric.RNMapsAirModule;
 import com.rnmaps.fabric.UrlTileManager;
 import com.rnmaps.fabric.WMSTileManager;
 
@@ -71,6 +72,8 @@ public class MapAirModulePackage extends TurboReactPackage {
         }
         if (NativeAirMapsModuleSpec.NAME.equals(name)) {
             return new NativeAirMapsModule(reactContext);
+        } else if ("RNMapsAirModule".equals(name)) {
+            return new RNMapsAirModule(reactContext);
         } else {
             return null;
         }
@@ -86,6 +89,16 @@ public class MapAirModulePackage extends TurboReactPackage {
                 map.put(NativeAirMapsModuleSpec.NAME, new ReactModuleInfo(
                         NativeAirMapsModuleSpec.NAME,       // name
                         NativeAirMapsModuleSpec.NAME,       // className
+                        false, // canOverrideExistingModule
+                        false, // needsEagerInit
+                        false, // isCXXModule
+                        true   // isTurboModule
+                ));
+
+                // Add the RNMapsAirModule with the exact name expected by JavaScript
+                map.put("RNMapsAirModule", new ReactModuleInfo(
+                        "RNMapsAirModule",       // name
+                        "RNMapsAirModule",       // className
                         false, // canOverrideExistingModule
                         false, // needsEagerInit
                         false, // isCXXModule
